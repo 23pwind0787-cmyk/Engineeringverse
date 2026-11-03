@@ -4,6 +4,10 @@ import { Container } from "@/components/Container";
 import { campuses, kindLabel, type CampusName, type Discipline } from "@/lib/disciplines";
 import { getDisciplines } from "@/lib/structure";
 
+// Reads from Supabase when configured, so this route must not be
+// prerendered under cacheComponents.
+export const instant = false;
+
 export const metadata: Metadata = {
   title: "Engineering Disciplines",
   description: "All UET Peshawar departments, centres and programmes, grouped by campus: Peshawar, Abbottabad, Bannu and Jalozai (Nowshera). Explore each field, its focus areas and typical career roles.",

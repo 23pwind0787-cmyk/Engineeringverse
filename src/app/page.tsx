@@ -5,6 +5,10 @@ import { campuses, kindLabel, type Discipline } from "@/lib/disciplines";
 import { getDisciplines } from "@/lib/structure";
 import { sections, siteConfig } from "@/lib/site";
 
+// Reads from Supabase when configured, so this route must not be
+// prerendered under cacheComponents.
+export const instant = false;
+
 export default async function HomePage() {
   const disciplines: Discipline[] = await getDisciplines();
   const disciplinesByCampus = (campus: string) => disciplines.filter((d) => d.campus === campus);

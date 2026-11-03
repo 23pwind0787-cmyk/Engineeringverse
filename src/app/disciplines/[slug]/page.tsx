@@ -5,6 +5,11 @@ import { Container } from "@/components/Container";
 import { disciplines, kindLabel } from "@/lib/disciplines";
 import { getDisciplineBySlug } from "@/lib/structure";
 
+// Reads from Supabase when configured, so this route must not be
+// prerendered under cacheComponents (see build error on Vercel:
+// "uncached or runtime data during prerendering" for /disciplines/[slug]).
+export const instant = false;
+
 // NOTE: `export const dynamicParams = false` was tried to make unknown
 // slugs return a true 404, but Next.js 16.4.3 with cacheComponents
 // rejects that segment config at build time, so it was removed.

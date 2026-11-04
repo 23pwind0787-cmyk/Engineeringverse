@@ -4,7 +4,7 @@ import { ComingSoon } from "@/components/ComingSoon";
 import { Container } from "@/components/Container";
 import { getArticlesByCategory } from "@/lib/articles";
 
-export const metadata: Metadata = { title: "Software Directory" };
+export const metadata: Metadata = { title: "Software Directory", robots: { index: false, follow: true } };
 
 export default function Page() {
   const hasArticles = getArticlesByCategory("software-news").length > 0;

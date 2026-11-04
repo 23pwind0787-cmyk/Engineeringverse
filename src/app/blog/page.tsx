@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: "Engineering Blog",
   description:
     "Articles and guides on engineering software, AI tools, technology news, tutorials and careers — researched from official sources.",
+  alternates: { canonical: "https://engineeringverse.me/blog" },
 };
 
 // Reads searchParams (category/tag filters), so this route must not be

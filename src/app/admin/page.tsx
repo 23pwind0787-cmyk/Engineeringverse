@@ -11,7 +11,7 @@ import type { Paper, PaperReport, Profile } from "@/lib/supabase/types";
 
 export const instant = false;
 
-export const metadata: Metadata = { title: "Admin dashboard" };
+export const metadata: Metadata = { title: "Admin dashboard", robots: { index: false, follow: false } };
 
 const inputClass = "mt-1 w-full rounded-lg border border-line bg-surface px-3 py-2 text-sm";
 

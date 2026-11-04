@@ -18,6 +18,7 @@ export async function generateMetadata({
     ? {
         title: `${paper.title} — Past Paper`,
         description: `${paper.title}: ${paper.exam_type} ${paper.year} (${paper.session}), ${paper.subject_code}, ${paper.department_name ?? ""}. Preview and download the PDF.`,
+        alternates: { canonical: `https://engineeringverse.me/past-papers/${id}` },
       }
     : { title: "Paper not found", robots: { index: false } };
 }

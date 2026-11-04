@@ -4,7 +4,7 @@ import { ComingSoon } from "@/components/ComingSoon";
 import { Container } from "@/components/Container";
 import { getArticlesByCategory } from "@/lib/articles";
 
-export const metadata: Metadata = { title: "AI Tools" };
+export const metadata: Metadata = { title: "AI Tools", robots: { index: false, follow: true } };
 
 export default function Page() {
   const hasArticles = getArticlesByCategory("ai-tools").length > 0;

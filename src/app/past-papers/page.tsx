@@ -10,6 +10,7 @@ export const instant = false;
 export const metadata: Metadata = {
   title: "UET Peshawar Past Papers",
   description: "Search, preview and download UET Peshawar past papers by campus, department, semester, subject, exam type, year and session. No account needed to download.",
+  alternates: { canonical: "https://engineeringverse.me/past-papers" },
 };
 
 const EXAM_TYPES = ["Mid", "Final", "Quiz", "Other"];

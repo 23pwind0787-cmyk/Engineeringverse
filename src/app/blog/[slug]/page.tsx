@@ -49,8 +49,28 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const article = getArticleBySlug(slug);
   if (!article) notFound();
 
+  const blogPostingJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: article.title,
+    description: article.summary,
+    datePublished: article.date,
+    author: {
+      "@type": "Person",
+      name: "Mufakker Aizaz",
+      description: "Industrial Engineering student, UET Peshawar, and editor of EngineeringVerse.",
+    },
+    publisher: { "@id": "https://engineeringverse.me/#organization" },
+    mainEntityOfPage: siteArticleUrl(article.slug),
+    inLanguage: "en",
+  };
+
   return (
     <Container className="py-12 sm:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }}
+      />
       <article className="mx-auto max-w-3xl">
         <Link href="/blog" className="text-sm font-medium text-brand-700">
           ← Back to all articles
@@ -61,6 +81,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">{article.title}</h1>
         <p className="mt-3 text-lg text-muted">{article.summary}</p>
         <p className="mt-4 text-sm text-muted">{formatArticleDate(article.date)}</p>
+        <p className="mt-2 text-sm text-muted">
+          By Mufakker Aizaz, Industrial Engineering student at UET Peshawar and editor of
+          EngineeringVerse.
+        </p>
 
         {article.tags.length > 0 && (
           <p className="mt-3 flex flex-wrap gap-2">

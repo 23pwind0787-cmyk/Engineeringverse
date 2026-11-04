@@ -9,7 +9,7 @@ import { getCampuses, getDepartments, getSemesters, getSubjects } from "@/lib/st
 
 export const instant = false;
 
-export const metadata: Metadata = { title: "Upload a past paper" };
+export const metadata: Metadata = { title: "Upload a past paper", robots: { index: false, follow: false } };
 
 export default async function UploadPage() {
   const account = await getCurrentAccount();

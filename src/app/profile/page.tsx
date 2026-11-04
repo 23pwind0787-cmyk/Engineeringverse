@@ -6,7 +6,7 @@ import { updateProfile } from "@/lib/actions/profile";
 
 export const instant = false;
 
-export const metadata: Metadata = { title: "Your profile" };
+export const metadata: Metadata = { title: "Your profile", robots: { index: false, follow: false } };
 
 export default async function ProfilePage() {
   const account = await getCurrentAccount();

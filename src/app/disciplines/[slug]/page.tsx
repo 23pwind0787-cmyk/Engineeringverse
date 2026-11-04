@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/Container";
 import { disciplines, kindLabel } from "@/lib/disciplines";
 import { getDisciplineBySlug } from "@/lib/structure";
+import { siteConfig } from "@/lib/site";
 
 // Reads from Supabase when configured, so this route must not be
 // prerendered under cacheComponents (see build error on Vercel:
@@ -29,6 +30,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     ? {
         title: `${d.name} — ${d.campus} Campus`,
         description: `${kindLabel[d.kind]} at UET Peshawar, ${d.campus} Campus: ${d.summary} Focus areas and typical roles explained.`,
+        alternates: { canonical: `${siteConfig.url}/disciplines/${slug}` },
       }
     : {};
 }
@@ -38,8 +40,21 @@ export default async function DisciplinePage({ params }: { params: Promise<{ slu
   const d = await getDisciplineBySlug(slug);
   if (!d) notFound();
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Disciplines", item: "https://engineeringverse.me/disciplines" },
+      { "@type": "ListItem", position: 2, name: d.name, item: `https://engineeringverse.me/disciplines/${slug}` },
+    ],
+  };
+
   return (
     <Container className="py-12 sm:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <nav aria-label="Breadcrumb" className="text-sm text-muted">
         <Link href="/disciplines" className="hover:text-brand-700">Disciplines</Link> <span aria-hidden>/</span> <span>{d.name}</span>
       </nav>

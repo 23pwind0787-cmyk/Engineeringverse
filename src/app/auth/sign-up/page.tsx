@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { Container } from "@/components/Container";
 import { AuthForm } from "@/components/AuthForm";
 
-export const metadata: Metadata = { title: "Create account" };
+export const metadata: Metadata = { title: "Create account", robots: { index: false, follow: false } };
 
 export default function SignUpPage() {
   return (

@@ -38,10 +38,19 @@ export const sections: SiteSection[] = [
   { key: "past-papers", label: "UET Peshawar Past Papers", href: "/past-papers", blurb: "Search, preview and download past papers. Students can contribute their own.", glyph: "▣", stage: 4 },
 ];
 
+/** Sections with live content. Placeholder sections (software, AI tools,
+// learning, projects, careers) stay out of the main navigation until
+// they are built, so crawlers and visitors are not sent to empty pages. */
+const liveNavKeys: SectionKey[] = ["disciplines", "past-papers", "blog"];
+
+export const liveSections: SiteSection[] = sections.filter((s) => liveNavKeys.includes(s.key));
+
 export const navItems = [
   { label: "Home", href: "/" },
-  ...sections.map((s) => ({
-    label: s.key === "past-papers" ? "Past Papers" : s.label.replace("Engineering ", "").replace(" & Innovations", ""),
-    href: s.href,
-  })),
+  ...sections
+    .filter((s) => liveNavKeys.includes(s.key))
+    .map((s) => ({
+      label: s.key === "past-papers" ? "Past Papers" : s.label.replace("Engineering ", "").replace(" & Innovations", ""),
+      href: s.href,
+    })),
 ];

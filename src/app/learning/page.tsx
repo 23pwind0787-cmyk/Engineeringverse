@@ -4,7 +4,7 @@ import { ComingSoon } from "@/components/ComingSoon";
 import { Container } from "@/components/Container";
 import { getArticlesByCategory } from "@/lib/articles";
 
-export const metadata: Metadata = { title: "Learning Resources" };
+export const metadata: Metadata = { title: "Learning Resources", robots: { index: false, follow: true } };
 
 export default function Page() {
   const hasTutorials = getArticlesByCategory("tutorials").length > 0;

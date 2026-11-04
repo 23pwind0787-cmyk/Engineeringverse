@@ -11,6 +11,7 @@ export const instant = false;
 export const metadata: Metadata = {
   title: "Engineering Disciplines",
   description: "All UET Peshawar departments, centres and programmes, grouped by campus: Peshawar, Abbottabad, Bannu and Jalozai (Nowshera). Explore each field, its focus areas and typical career roles.",
+  alternates: { canonical: "https://engineeringverse.me/disciplines" },
 };
 
 export default async function DisciplinesPage() {

@@ -9,7 +9,7 @@ import type { Paper } from "@/lib/supabase/types";
 
 export const instant = false;
 
-export const metadata: Metadata = { title: "Your dashboard" };
+export const metadata: Metadata = { title: "Your dashboard", robots: { index: false, follow: false } };
 
 export default async function DashboardPage({
   searchParams,

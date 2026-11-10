@@ -10,8 +10,17 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: { default: `${siteConfig.name} | ${siteConfig.tagline}`, template: `%s | ${siteConfig.name}` },
   description: siteConfig.description,
-  openGraph: { title: siteConfig.name, description: siteConfig.description, siteName: siteConfig.name, type: "website" },
-  twitter: { card: "summary", title: siteConfig.name, description: siteConfig.description },
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  openGraph: { title: siteConfig.name, description: siteConfig.description, siteName: siteConfig.name, type: "website", images: [{ url: "/og.png", width: 1200, height: 630, alt: siteConfig.name }] },
+  twitter: { card: "summary_large_image", title: siteConfig.name, description: siteConfig.description, images: ["/og.png"] },
 };
 
 const organizationJsonLd = {
@@ -22,6 +31,7 @@ const organizationJsonLd = {
       "@id": "https://engineeringverse.me/#organization",
       name: "EngineeringVerse",
       url: "https://engineeringverse.me/",
+      logo: "https://engineeringverse.me/logo.svg",
       description:
         "An independent student-run resource for engineering students: UET Peshawar past papers, department guides, and engineering software news researched from official sources.",
       foundingDate: "2026",

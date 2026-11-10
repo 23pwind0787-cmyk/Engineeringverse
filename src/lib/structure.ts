@@ -53,6 +53,28 @@ export async function getDisciplineBySlug(slug: string): Promise<Discipline | un
   return all.find((d) => d.slug === slug);
 }
 
+/**
+ * The departments row for a slug, with its database id. The editorial
+ * Discipline from getDisciplineBySlug carries no DB id, and papers are
+ * queried by department_id — so the resources section needs this.
+ * Returns null when Supabase is not configured or the slug has no row.
+ */
+export async function getDepartmentRowBySlug(slug: string): Promise<DepartmentRow | null> {
+  const supabase = await createServerSupabaseClient();
+  if (!supabase) return null;
+  try {
+    const { data, error } = await supabase
+      .from("departments")
+      .select("id, campus_id, name, slug, kind")
+      .eq("slug", slug)
+      .maybeSingle();
+    if (error || !data) return null;
+    return data as DepartmentRow;
+  } catch {
+    return null;
+  }
+}
+
 export async function getCampuses(): Promise<Campus[]> {
   const supabase = await createServerSupabaseClient();
   if (!supabase) {

@@ -5,6 +5,9 @@ import { campuses, kindLabel, type Discipline } from "@/lib/disciplines";
 import { getDisciplines } from "@/lib/structure";
 import { formatArticleDate, getAllArticles } from "@/lib/articles";
 import { searchPapers } from "@/lib/papers";
+import { searchProjects } from "@/lib/projects";
+import { formatEventDateTime, listUpcomingEvents } from "@/lib/events";
+import { EVENT_TYPES, PROJECT_CATEGORIES } from "@/lib/supabase/types";
 
 export const metadata: Metadata = {
   title: "Learn. Build. Innovate. Share.",
@@ -21,6 +24,8 @@ export default async function HomePage() {
   const disciplines: Discipline[] = await getDisciplines();
   const disciplinesByCampus = (campus: string) => disciplines.filter((d) => d.campus === campus);
   const recentPapers = (await searchPapers({})).slice(0, 6);
+  const featuredProjects = (await searchProjects({})).slice(0, 6);
+  const upcomingEvents = await listUpcomingEvents(4);
   const articles = getAllArticles();
   return (
     <>
@@ -51,11 +56,39 @@ export default async function HomePage() {
             </div>
             <Link href="/projects" className="hidden shrink-0 text-sm font-semibold text-brand-700 hover:underline sm:block">View all →</Link>
           </div>
-          <div className="mt-8 rounded-xl border border-line bg-surface p-8 text-center">
-            <p className="font-semibold">No projects shared yet</p>
-            <p className="mt-2 text-sm text-muted">Be the first to showcase an innovative project or final year project.</p>
-            <Link href="/upload" className="mt-4 inline-flex rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700">Share your project</Link>
-          </div>
+          {featuredProjects.length === 0 ? (
+            <div className="mt-8 rounded-xl border border-line bg-surface p-8 text-center">
+              <p className="font-semibold">No projects shared yet</p>
+              <p className="mt-2 text-sm text-muted">Be the first to showcase an innovative project or final year project.</p>
+              <Link href="/upload" className="mt-4 inline-flex rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700">Share your project</Link>
+            </div>
+          ) : (
+            <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {featuredProjects.map((project) => (
+                <li key={project.id} className="rounded-xl border border-line bg-surface p-5">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-brand-500">
+                    {PROJECT_CATEGORIES.find((c) => c.value === project.category)?.label ?? project.category}
+                  </p>
+                  <h3 className="mt-1 font-semibold">
+                    <Link href={`/projects/${project.id}`} className="hover:text-brand-700 hover:underline">
+                      {project.title}
+                    </Link>
+                  </h3>
+                  <p className="mt-2 text-sm text-muted">
+                    {project.department_name ?? "Department"}
+                    {project.uploader_name ? ` · Shared by ${project.uploader_name}` : ""}
+                  </p>
+                  <p className="mt-2 text-sm text-muted">
+                    {project.download_count} download{project.download_count === 1 ? "" : "s"} ·{" "}
+                    {project.view_count} view{project.view_count === 1 ? "" : "s"}
+                  </p>
+                  <Link href={`/projects/${project.id}`} className="mt-4 inline-block text-sm font-semibold text-brand-700 hover:underline">
+                    View project →
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </Container>
       </section>
 
@@ -110,11 +143,35 @@ export default async function HomePage() {
             </div>
             <Link href="/seminars" className="hidden shrink-0 text-sm font-semibold text-brand-700 hover:underline sm:block">View all →</Link>
           </div>
-          <div className="mt-8 rounded-xl border border-line bg-surface p-8 text-center">
-            <p className="font-semibold">No seminars announced yet</p>
-            <p className="mt-2 text-sm text-muted">Seminar and event announcements will appear here once departments and students start sharing them.</p>
-            <Link href="/seminars" className="mt-4 inline-flex rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700">Seminars &amp; Events</Link>
-          </div>
+          {upcomingEvents.length === 0 ? (
+            <div className="mt-8 rounded-xl border border-line bg-surface p-8 text-center">
+              <p className="font-semibold">No seminars announced yet</p>
+              <p className="mt-2 text-sm text-muted">Seminar and event announcements will appear here once departments and students start sharing them.</p>
+              <Link href="/seminars" className="mt-4 inline-flex rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700">Seminars &amp; Events</Link>
+            </div>
+          ) : (
+            <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {upcomingEvents.map((event) => (
+                <li key={event.id} className="rounded-xl border border-line bg-surface p-5">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-brand-500">
+                    {EVENT_TYPES.find((t) => t.value === event.event_type)?.label ?? event.event_type}
+                  </p>
+                  <h3 className="mt-1 font-semibold">
+                    <Link href={`/seminars/${event.id}`} className="hover:text-brand-700 hover:underline">
+                      {event.title}
+                    </Link>
+                  </h3>
+                  <p className="mt-2 text-sm text-muted">{formatEventDateTime(event.starts_at)}</p>
+                  <p className="mt-1 text-sm text-muted">
+                    {event.venue ?? "Online"} · {event.organiser_department_name ?? event.organiser_name}
+                  </p>
+                  <Link href={`/seminars/${event.id}`} className="mt-4 inline-block text-sm font-semibold text-brand-700 hover:underline">
+                    View event →
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </Container>
       </section>
 

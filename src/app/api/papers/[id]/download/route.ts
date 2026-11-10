@@ -1,9 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { recordContentEvent } from "@/lib/content-events";
 import { createServiceRoleClient, isServiceRoleConfigured } from "@/lib/supabase/admin";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export async function GET(
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
@@ -17,13 +18,17 @@ export async function GET(
   if (!anon) return NextResponse.json({ error: "Not configured." }, { status: 503 });
   const { data: paper } = await anon
     .from("papers")
-    .select("storage_path, status, title")
+    .select("storage_path, status, hidden, title")
     .eq("id", id)
-    .eq("status", "published")
+    .eq("status", "approved")
+    .eq("hidden", false)
     .maybeSingle();
   if (!paper) return NextResponse.json({ error: "Paper not found." }, { status: 404 });
 
-  await anon.rpc("increment_download_count", { paper_id: id });
+  // Honest counting (Stage 8): one counted download per user (or per
+  // IP for guests) per day. The function refuses to count content
+  // that is not approved and visible.
+  await recordContentEvent("paper", id, "download", request);
 
   const service = createServiceRoleClient();
   const safeName = paper.title.replace(/[^a-zA-Z0-9._-]+/g, "_").slice(0, 80) || "paper";

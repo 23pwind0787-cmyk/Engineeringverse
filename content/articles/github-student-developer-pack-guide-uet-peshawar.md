@@ -17,8 +17,6 @@ sourceUrl: "https://education.github.com/pack"
 
 The GitHub Student Developer Pack is a free bundle for verified students: GitHub's own paid features while you are a student, plus partner offers you claim one by one from the pack page. It costs nothing to apply, and verification does not switch every benefit on at once — you claim each partner offer separately.
 
-One thing it does not have: GitHub runs no referral programme for the pack. Telling a friend about it earns you nothing; your friend simply gets the same benefits if they qualify and verify with their own student proof.
-
 ## Who qualifies
 
 According to GitHub's documentation, you qualify if you meet all four of these:
@@ -69,8 +67,6 @@ These are the offers listed on GitHub's pack page, checked on 10 November 2026. 
 - **GitHub Pages** — one site per GitHub account, plus unlimited project sites.
 - **Stripe** — $25 in credits to offset fees.
 
-## A UET example
-
-This site's own domain is an example of the pack working. EngineeringVerse runs on engineeringverse.me, registered free for one year through the Namecheap offer in the pack after GitHub Education verification with a UET Peshawar email address (23pwind0787@uetpeshawar.edu.pk). The application was approved on 31 October 2026 and the benefits unlocked on 3 November 2026. The domain is free until 3 November 2027; after that it renews at Namecheap's normal price.
+## For UET Peshawar students
 
 If you are a UET Peshawar student, the same route is open to you: apply with your university email and a current student ID or enrolment letter, and claim the offers you will actually use — the domain, Copilot, Azure credits and JetBrains are the ones most engineering students get value from first.

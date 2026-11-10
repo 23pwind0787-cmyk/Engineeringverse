@@ -17,7 +17,8 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const project = await getProjectForViewer(id, null, false);
+  const account = await getCurrentAccount();
+  const project = await getProjectForViewer(id, account?.userId ?? null, isAdmin(account));
   return project
     ? {
         title: `${project.title} — Project`,

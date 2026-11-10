@@ -17,7 +17,8 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const event = await getEventForViewer(id, null, false);
+  const account = await getCurrentAccount();
+  const event = await getEventForViewer(id, account?.userId ?? null, isAdmin(account));
   return event
     ? {
         title: `${event.title} — Seminar & Event`,

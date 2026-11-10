@@ -11,6 +11,8 @@ tags:
   - "Autonomous Robots"
 sourceName: "TechTimes — Disneyland Begins Training for Pixar Bots, Brings 'Star Wars' Drones to Theme Park"
 sourceUrl: "https://www.techtimes.com/articles/330062/20261105/disneyland-begins-training-pixar-bots-brings-star-wars-drones-theme-park.htm"
+featuredImage: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Disneyland_park_-_Anaheim_Los_Angeles_California_USA_%289893964646%29_%283%29.jpg/1280px-Disneyland_park_-_Anaheim_Los_Angeles_California_USA_%289893964646%29_%283%29.jpg"
+featuredImageCredit: "Disneyland Resort entrance, Anaheim. Photo: Boris Dzhingarov via Wikimedia Commons (CC BY 2.0). The image shows the park, not the robot prototypes."
 ---
 
 ## What Disney showed

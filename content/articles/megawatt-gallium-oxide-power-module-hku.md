@@ -11,6 +11,8 @@ tags:
   - "Wide Bandgap"
 sourceName: "The University of Hong Kong — Breakthrough in Ultrawide-Bandgap Semiconductors for Power Electronics"
 sourceUrl: "https://ece.hku.hk/20260410-1/"
+featuredImage: "https://media.springernature.com/lw1200/springer-static/image/art%3A10.1038%2Fs41467-026-71274-6/MediaObjects/41467_2026_71274_Fig1_HTML.png"
+featuredImageCredit: "Figure 1 from Gong et al., Nature Communications (2026), CC BY 4.0 — pulsed-power applications, material selection and the Ga2O3 package design"
 ---
 
 ## What was built

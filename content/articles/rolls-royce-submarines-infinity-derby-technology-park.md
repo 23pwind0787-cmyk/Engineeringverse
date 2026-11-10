@@ -12,6 +12,8 @@ tags:
   - "Additive Manufacturing"
 sourceName: "Rolls-Royce — Rolls-Royce Submarines partners with INFINITY to develop new capabilities for UK defence"
 sourceUrl: "https://www.rolls-royce.com/media/press-releases/2026/06-11-2026-rolls-royce-submarines-partners-with-infinity-to-develop-new-capabilities-for-uk-defence.aspx"
+featuredImage: "https://www.rolls-royce.com/~/media/Images/R/Rolls-Royce/content-images/rolls-royce-submarines-partners-with-infinity-sm-image.jpg?h=300&iar=0&w=480"
+featuredImageCredit: "Artist's impression of the INFINITY Technology Park headquarters — Rolls-Royce / INFINITY press image"
 ---
 
 ## The partnership

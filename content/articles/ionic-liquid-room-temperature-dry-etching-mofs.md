@@ -11,6 +11,8 @@ tags:
   - "Materials Science"
 sourceName: "Communications Materials — Ionic-liquid-assisted room-temperature dry etching of metal–organic frameworks"
 sourceUrl: "https://doi.org/10.1038/s43246-026-01396-3"
+featuredImage: "https://media.springernature.com/lw1200/springer-static/image/art%3A10.1038%2Fs43246-026-01396-3/MediaObjects/43246_2026_1396_Fig2_HTML.png"
+featuredImageCredit: "Figure 2 from Zheng et al., Communications Materials (2026), CC BY 4.0 — fine patterns etched into the ionic-liquid-filled MOF, including the 130–300 nm lines"
 ---
 
 ## The problem: MOFs are useful, but too fragile to shape

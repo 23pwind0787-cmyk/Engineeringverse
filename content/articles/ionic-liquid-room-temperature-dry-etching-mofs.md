@@ -25,7 +25,7 @@ The infiltrated material was measurably harder and more stable, and it survived 
 
 ## What they carved
 
-Using the method, the team patterned a 5 × 5 micrometre square, freestanding pillars and even a Chinese character with etched lines 130–300 nanometres wide. They also demonstrated fine patterning with sub-100-nanometre precision at room temperature — a resolution that previously required cooling the sample.
+Using the method, the team patterned a 5 × 5 micrometre square, freestanding pillars and even a Chinese character with etched lines 130–300 nanometres wide — a resolution at room temperature that previously required cooling the sample.
 
 ## Why it matters
 

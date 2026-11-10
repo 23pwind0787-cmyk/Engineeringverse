@@ -30,7 +30,7 @@ export default async function DisciplinesPage() {
             {byCampus(campus).map((d) => (
               <li key={d.slug}>
                 <Link href={`/disciplines/${d.slug}`} className="flex h-full flex-col rounded-xl border border-line bg-surface p-6 transition hover:-translate-y-0.5 hover:border-brand-500 hover:shadow-md">
-                  <p className="text-xs font-semibold uppercase tracking-widest text-brand-600">{kindLabel[d.kind]}</p>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-brand-500">{kindLabel[d.kind]}</p>
                   <h3 className="mt-1 text-lg font-semibold">{d.name}</h3>
                   <p className="mt-2 flex-1 text-sm text-muted">{d.summary}</p>
                   <span className="mt-4 text-sm font-semibold text-brand-700">Learn more →</span>

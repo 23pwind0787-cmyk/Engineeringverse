@@ -59,7 +59,7 @@ export default async function DisciplinePage({ params }: { params: Promise<{ slu
         <Link href="/disciplines" className="hover:text-brand-700">Disciplines</Link> <span aria-hidden>/</span> <span>{d.name}</span>
       </nav>
       <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">{d.name}</h1>
-      <p className="mt-2 text-sm font-semibold uppercase tracking-widest text-brand-600">
+      <p className="mt-2 text-sm font-semibold uppercase tracking-widest text-brand-500">
         {kindLabel[d.kind]} · {d.campus} Campus · UET Peshawar
       </p>
       <p className="mt-4 max-w-3xl text-lg text-muted">{d.overview}</p>

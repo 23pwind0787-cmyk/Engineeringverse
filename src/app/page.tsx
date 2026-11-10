@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/Container";
-import { SectionCard } from "@/components/SectionCard";
 import { campuses, kindLabel, type Discipline } from "@/lib/disciplines";
 import { getDisciplines } from "@/lib/structure";
 import { formatArticleDate, getAllArticles } from "@/lib/articles";
-import { liveSections, sections } from "@/lib/site";
+import { searchPapers } from "@/lib/papers";
 
 export const metadata: Metadata = {
-  title: "UET Past Papers & Engineering Guides",
+  title: "Learn. Build. Innovate. Share.",
   description:
-    "Download UET Peshawar past papers by subject and semester, explore UET departments and programmes, and read engineering software news researched from official sources.",
+    "EngineeringVerse connects engineering minds through knowledge, creativity and innovation — find departments, academic resources, innovative projects, seminars and engineering software news.",
   alternates: { canonical: "https://engineeringverse.me/" },
 };
 
@@ -21,42 +20,101 @@ export const instant = false;
 export default async function HomePage() {
   const disciplines: Discipline[] = await getDisciplines();
   const disciplinesByCampus = (campus: string) => disciplines.filter((d) => d.campus === campus);
-  const papers = sections.find((s) => s.key === "past-papers")!;
+  const recentPapers = (await searchPapers({})).slice(0, 6);
   const articles = getAllArticles();
   return (
     <>
       <section className="border-b border-line bg-surface-alt">
         <Container className="py-16 sm:py-24">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm font-semibold uppercase tracking-widest text-brand-600">For the global engineering community</p>
-            <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-6xl">
-              UET Peshawar Past Papers, Departments &amp; <span className="text-brand-600">Engineering Software News.</span>
+            <p className="text-sm font-semibold uppercase tracking-widest text-brand-500">Learn. Build. Innovate. Share.</p>
+            <h1 className="mt-4 text-5xl font-bold tracking-tight sm:text-7xl">
+              Engineering<span className="text-brand-500">Verse</span>
             </h1>
             <p className="mt-6 text-lg text-muted">
-              EngineeringVerse helps engineering students at UET Peshawar — and beyond — find what they
-              actually need: past papers organised by subject, semester, and exam type; clear guides to
-              the departments and programmes UET Peshawar offers across its four campuses; and news about
-              engineering software, researched from official vendor sources and written so a student can
-              act on it. Everything here is free to read. Past papers can be searched and previewed
-              without an account, and students can contribute papers of their own once they register.
+              Connecting engineering minds through knowledge, creativity and innovation.
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-              <Link href="/disciplines" className="rounded-lg bg-brand-600 px-6 py-3 text-sm font-semibold text-white hover:bg-brand-700">Explore disciplines</Link>
-              <Link href={papers.href} className="rounded-lg border border-line bg-surface px-6 py-3 text-sm font-semibold hover:border-brand-500">Browse past papers</Link>
+              <Link href="/disciplines" className="rounded-lg bg-brand-600 px-6 py-3 text-sm font-semibold text-white hover:bg-brand-700">Explore departments</Link>
+              <Link href="/upload" className="rounded-lg border border-line bg-surface px-6 py-3 text-sm font-semibold hover:border-brand-500">Upload resources</Link>
             </div>
           </div>
         </Container>
       </section>
 
-      <section aria-labelledby="explore-heading" className="py-16">
+      <section aria-labelledby="projects-heading" className="py-16">
         <Container>
-          <h2 id="explore-heading" className="text-2xl font-bold tracking-tight sm:text-3xl">Start here</h2>
-          <p className="mt-2 max-w-2xl text-muted">Choose a section to get started.</p>
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {liveSections.map((s) => (
-              <li key={s.key}><SectionCard href={s.href} title={s.label} blurb={s.blurb} glyph={s.glyph} /></li>
-            ))}
-          </ul>
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <h2 id="projects-heading" className="text-2xl font-bold tracking-tight sm:text-3xl">Featured engineering projects</h2>
+              <p className="mt-2 text-muted">Innovative projects and final year projects shared by students.</p>
+            </div>
+            <Link href="/projects" className="hidden shrink-0 text-sm font-semibold text-brand-700 hover:underline sm:block">View all →</Link>
+          </div>
+          <div className="mt-8 rounded-xl border border-line bg-surface p-8 text-center">
+            <p className="font-semibold">No projects shared yet</p>
+            <p className="mt-2 text-sm text-muted">Be the first to showcase an innovative project or final year project.</p>
+            <Link href="/upload" className="mt-4 inline-flex rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700">Share your project</Link>
+          </div>
+        </Container>
+      </section>
+
+      <section aria-labelledby="resources-heading" className="border-t border-line py-16">
+        <Container>
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <h2 id="resources-heading" className="text-2xl font-bold tracking-tight sm:text-3xl">Recently uploaded resources</h2>
+              <p className="mt-2 text-muted">The latest papers and resources contributed by students.</p>
+            </div>
+            <Link href="/disciplines" className="hidden shrink-0 text-sm font-semibold text-brand-700 hover:underline sm:block">Browse departments →</Link>
+          </div>
+          {recentPapers.length === 0 ? (
+            <div className="mt-8 rounded-xl border border-line bg-surface p-8 text-center">
+              <p className="font-semibold">No resources uploaded yet</p>
+              <p className="mt-2 text-sm text-muted">Be the first to share a past paper, lab report or notes with other students.</p>
+              <Link href="/upload" className="mt-4 inline-flex rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700">Upload a resource</Link>
+            </div>
+          ) : (
+            <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {recentPapers.map((paper) => (
+                <li key={paper.id} className="rounded-xl border border-line bg-surface p-5">
+                  <h3 className="font-semibold">
+                    <Link href={`/past-papers/${paper.id}`} className="hover:text-brand-700 hover:underline">
+                      {paper.title}
+                    </Link>
+                  </h3>
+                  <p className="mt-2 text-sm text-muted">
+                    {paper.department_name ?? "Department"} · Semester {paper.semester_number ?? "?"} ·{" "}
+                    {paper.subject_code} · {paper.exam_type} {paper.year} ({paper.session})
+                  </p>
+                  <p className="mt-2 text-sm text-muted">
+                    {paper.download_count} download{paper.download_count === 1 ? "" : "s"} ·{" "}
+                    {(paper.file_size / 1024).toFixed(0)} KB
+                  </p>
+                  <Link href={`/past-papers/${paper.id}`} className="mt-4 inline-block text-sm font-semibold text-brand-700 hover:underline">
+                    Preview and download →
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+        </Container>
+      </section>
+
+      <section aria-labelledby="seminars-heading" className="border-t border-line py-16">
+        <Container>
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <h2 id="seminars-heading" className="text-2xl font-bold tracking-tight sm:text-3xl">Upcoming seminars</h2>
+              <p className="mt-2 text-muted">Seminars, workshops and engineering events.</p>
+            </div>
+            <Link href="/seminars" className="hidden shrink-0 text-sm font-semibold text-brand-700 hover:underline sm:block">View all →</Link>
+          </div>
+          <div className="mt-8 rounded-xl border border-line bg-surface p-8 text-center">
+            <p className="font-semibold">No seminars announced yet</p>
+            <p className="mt-2 text-sm text-muted">Seminar and event announcements will appear here once departments and students start sharing them.</p>
+            <Link href="/seminars" className="mt-4 inline-flex rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700">Seminars &amp; Events</Link>
+          </div>
         </Container>
       </section>
 
@@ -98,7 +156,7 @@ export default async function HomePage() {
                 {disciplinesByCampus(campus).map((d) => (
                   <li key={d.slug}>
                     <Link href={`/disciplines/${d.slug}`} className="block h-full rounded-xl border border-line bg-surface p-5 transition hover:border-brand-500 hover:shadow-md">
-                      <p className="text-xs font-semibold uppercase tracking-widest text-brand-600">{kindLabel[d.kind]}</p>
+                      <p className="text-xs font-semibold uppercase tracking-widest text-brand-500">{kindLabel[d.kind]}</p>
                       <h4 className="mt-1 font-semibold">{d.name}</h4>
                       <p className="mt-2 text-sm text-muted">{d.summary}</p>
                     </Link>
@@ -115,14 +173,17 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      <section aria-labelledby="papers-heading" className="py-16">
+      <section aria-labelledby="share-heading" className="py-16">
         <Container>
           <div className="rounded-2xl bg-brand-600 p-8 text-white sm:p-12">
-            <h2 id="papers-heading" className="text-2xl font-bold sm:text-3xl">UET Peshawar Past Papers</h2>
+            <h2 id="share-heading" className="text-2xl font-bold sm:text-3xl">Share what you know</h2>
             <p className="mt-3 max-w-2xl text-white/90">
-              Search, preview and download past papers without an account. Registered students can contribute papers to help others prepare.
+              Upload past papers, lab reports, notes and projects to help other engineering students learn.
             </p>
-            <Link href={papers.href} className="mt-6 inline-flex rounded-lg bg-white px-6 py-3 text-sm font-semibold text-brand-700 hover:bg-brand-50">Go to past papers</Link>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <Link href="/upload" className="inline-flex rounded-lg bg-white px-6 py-3 text-sm font-semibold text-brand-600 hover:bg-brand-50">Upload resources</Link>
+              <Link href="/disciplines" className="inline-flex rounded-lg border border-white/40 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10">Browse departments</Link>
+            </div>
           </div>
         </Container>
       </section>

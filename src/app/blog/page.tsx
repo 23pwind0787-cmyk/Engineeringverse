@@ -30,7 +30,7 @@ function ArticleCard({ article }: { article: Article }) {
         href={`/blog/${article.slug}`}
         className="flex h-full flex-col gap-3 rounded-xl border border-line bg-surface p-5 transition hover:-translate-y-0.5 hover:border-brand-500 hover:shadow-md"
       >
-        <p className="text-xs font-semibold uppercase tracking-widest text-brand-600">
+        <p className="text-xs font-semibold uppercase tracking-widest text-brand-500">
           {categoryLabels[article.category]}
         </p>
         <h2 className="text-lg font-semibold">{article.title}</h2>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Container } from "./Container";
 import { Logo } from "./Logo";
-import { liveSections, siteConfig } from "@/lib/site";
+import { navItems, siteConfig } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -14,16 +14,16 @@ export function Footer() {
         <nav aria-label="Explore">
           <h2 className="mb-3 text-sm font-semibold">Explore</h2>
           <ul className="grid gap-2 text-sm text-muted">
-            {liveSections.slice(0, 2).map((s) => (
-              <li key={s.key}><Link className="hover:text-brand-700" href={s.href}>{s.label}</Link></li>
+            {navItems.slice(0, 4).map((item) => (
+              <li key={item.href}><Link className="hover:text-brand-700" href={item.href}>{item.label}</Link></li>
             ))}
           </ul>
         </nav>
         <nav aria-label="Community">
           <h2 className="mb-3 text-sm font-semibold">Community</h2>
           <ul className="grid gap-2 text-sm text-muted">
-            {liveSections.slice(2).map((s) => (
-              <li key={s.key}><Link className="hover:text-brand-700" href={s.href}>{s.label}</Link></li>
+            {navItems.slice(4).map((item) => (
+              <li key={item.href}><Link className="hover:text-brand-700" href={item.href}>{item.label}</Link></li>
             ))}
           </ul>
         </nav>

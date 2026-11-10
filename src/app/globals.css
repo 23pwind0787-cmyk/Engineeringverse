@@ -1,23 +1,13 @@
 @import "tailwindcss";
 
+/* Always-dark navy theme: dark navy background with electric blue highlights. */
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
-  --surface: #ffffff;
-  --surface-alt: #f8fafc;
-  --line: #e2e8f0;
-  --muted: #475569;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0b1120;
-    --foreground: #e5e7eb;
-    --surface: #0f172a;
-    --surface-alt: #0b1324;
-    --line: #1e293b;
-    --muted: #94a3b8;
-  }
+  --background: #0b1f33;
+  --foreground: #e9eff6;
+  --surface: #122a44;
+  --surface-alt: #0e2439;
+  --line: #21405c;
+  --muted: #a3b8cc;
 }
 
 @theme inline {
@@ -27,10 +17,10 @@
   --color-surface-alt: var(--surface-alt);
   --color-line: var(--line);
   --color-muted: var(--muted);
-  --color-brand-50: color-mix(in srgb, #2563eb 10%, var(--surface));
-  --color-brand-500: #3b82f6;
-  --color-brand-600: #2563eb;
-  --color-brand-700: #1d4ed8;
+  --color-brand-50: color-mix(in srgb, #1677ff 14%, var(--surface));
+  --color-brand-500: #3b9bff;
+  --color-brand-600: #1677ff;
+  --color-brand-700: #4da3ff;
   --font-sans: var(--font-geist-sans), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
 }

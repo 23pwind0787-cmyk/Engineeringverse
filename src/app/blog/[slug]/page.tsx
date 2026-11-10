@@ -75,7 +75,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <Link href="/blog" className="text-sm font-medium text-brand-700">
           ← Back to all articles
         </Link>
-        <p className="mt-6 text-xs font-semibold uppercase tracking-widest text-brand-600">
+        <p className="mt-6 text-xs font-semibold uppercase tracking-widest text-brand-500">
           {categoryLabels[article.category]}
         </p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">{article.title}</h1>
@@ -124,7 +124,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               <li>
                 {article.sourceUrl ? (
                   <a
-                    className="font-medium text-brand-700 underline hover:text-brand-600"
+                    className="font-medium text-brand-700 underline hover:text-brand-500"
                     href={article.sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
